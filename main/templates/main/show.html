@@ -7,18 +7,32 @@
 </head>
 <body>
 
-    <h1>Compras Semanais</h1>
-    <button> Voltar </button>
+    <h1>{{name}}</h1>
+    <a href= '{% url "index" %}'>  <button type="submit"> Voltar </button></a>
     <br>
-    <input type="text" name="nome" placeholder="Nova Tarefa"/>
-    <button> Adicionar </button>
+    <form method='post' action="{% url 'store-item' todo_id %}">
+        {% csrf_token %}
+        <input type="text" id="lista" name="text" placeholder="Nova Item">
+        <button> Adicionar </button>
+        <br><br>
+    </form>
     <ul> 
         {% for item in items %}
-            <li> 
-                {{ item.text }}
-                <button> Concluído </button>
-                <button> Excluir </button>
-            </li>
+        <li> 
+         {{ item.text }}
+         <form method='post' action="{% url 'put-item' item.id %}" style="display: inline">
+            {% csrf_token %}
+            {% if item.complete %}
+                <button type='submit'> Concluído </button>
+            {% else %}
+                <button type='submit'> Pendente </button>
+            {% endif %}
+         </form>
+            <form method='post' action="{% url 'destroy-item' item.todo.id item.id %}">
+            {% csrf_token %}
+            <button type="submit"> Excluir </button>
+        </form>
+        </li>
         {% endfor %}
        
     </ul>
