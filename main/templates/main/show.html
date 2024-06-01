@@ -6,7 +6,22 @@
     <title>Delfin em Quem?</title>
 </head>
 <body>
-    <p> Template show </p>
+
+    <h1>Compras Semanais</h1>
+    <button> Voltar </button>
+    <br>
+    <input type="text" name="nome" placeholder="Nova Tarefa"/>
+    <button> Adicionar </button>
+    <ul> 
+        {% for item in items %}
+            <li> 
+                {{ item.text }}
+                <button> Concluído </button>
+                <button> Excluir </button>
+            </li>
+        {% endfor %}
+       
+    </ul>
    
 </body>
 </html>

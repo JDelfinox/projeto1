@@ -6,7 +6,17 @@
     <title>Delfin em Quem?</title>
 </head>
 <body>
-    <p> Template index </p>
-   
+    <h1>Lista de Tarefas</h1>
+    <input type="text" name="nome" placeholder="Nova Tarefa"/>
+    <button> Adicionar </button>
+    <ul> 
+        {% for todo in todos%}
+           <li> {{todo.name}}
+              <a href="{% url 'show' todo.id %}">  <button type="button"> Abrir </button> </a>
+                <button type="submit"> Excluir </button>
+           </li>
+        {% endfor %}
+    </ul>
+
 </body>
 </html>
