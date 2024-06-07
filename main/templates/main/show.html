@@ -1,19 +1,16 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delfin em Quem?</title>
-</head>
-<body>
+{% extends 'main/base.html' %}
 
-    <h1>{{name}}</h1>
-    <a href= '{% url "index" %}'>  <button type="submit"> Voltar </button></a>
+{% block title %} Detalhes da Tarefa{% endblock %}
+
+<h1>{% block title_h1 %} {{name}} {% endblock%}</h1>
+
+{% block content %}
+    <a href= '{% url "index" %}'>  <button type="submit"class="btn btn-secondary"> Voltar </button></a>
     <br>
     <form method='post' action="{% url 'store-item' todo_id %}">
         {% csrf_token %}
         <input type="text" id="lista" name="text" placeholder="Nova Item">
-        <button> Adicionar </button>
+        <button class="btn btn-primary"> Adicionar </button>
         <br><br>
     </form>
     <ul> 
@@ -23,19 +20,17 @@
          <form method='post' action="{% url 'put-item' item.id %}" style="display: inline">
             {% csrf_token %}
             {% if item.complete %}
-                <button type='submit'> Concluído </button>
+                <button type='submit'class="btn btn-info"> Concluído </button>
             {% else %}
-                <button type='submit'> Pendente </button>
+                <button type='submit'class="btn btn-warning"> Pendente </button>
             {% endif %}
          </form>
             <form method='post' action="{% url 'destroy-item' item.todo.id item.id %}">
             {% csrf_token %}
-            <button type="submit"> Excluir </button>
+            <button type="submit"class="btn btn-danger"> Excluir </button>
         </form>
         </li>
         {% endfor %}
        
     </ul>
-   
-</body>
-</html>
+{% endblock %}   
